@@ -8,7 +8,8 @@ export async function POST(request: Request) {
 
   try {
     const { ip } = await request.json(); // Extract IP address from request body
-
+    console.log(ip);
+    
     // Save IP address to database
     const ipAddress = new IpAddress({ ip });
     await ipAddress.save();

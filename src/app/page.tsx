@@ -4,8 +4,7 @@ import shape from "../assets/shape.png";
 import React from 'react';
 
 export default async function Home() {
-  const ip = await getClientIp();
-  console.log(ip);
+  await getClientIp();
   
   return (
     <div className="min-h-screen flex items-center justify-center bg-white dark:bg-dark">
@@ -27,7 +26,7 @@ async function getClientIp(): Promise<string> {
   const headers = new Headers();
 
   const forwardedFor = headers.get('x-forwarded-for') || 'Unknown IP';
-  console.log(headers.get('x-forwarded-for'), headers);
+  console.log(headers);
   
   // You can still send the IP to an API or database
   await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/ip`, {
