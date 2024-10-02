@@ -2,6 +2,7 @@ import Image from "next/image";
 import shape from "../assets/shape.png";
 
 import React from 'react';
+import { headers } from "next/headers";
 
 export default async function Home() {
   await getClientIp();
@@ -23,22 +24,28 @@ export default async function Home() {
 }
 
 async function getClientIp(): Promise<string> {
-  const headers = new Headers();
+  const requestHeaders = headers();
 
-  const forwardedFor = headers.get('x-forwarded-for') || 'Unknown IP';
-  console.log(headers);
+  // Check for common headers used to store client IPs
+  const forwardedFor = requestHeaders.get('x-forwarded-for');
+  const realIp = requestHeaders.get('x-real-ip');
+  const cfConnectingIp = requestHeaders.get('cf-connecting-ip');
+
+  // Determine the best candidate for the client IP
+  const ip = forwardedFor || realIp || cfConnectingIp || 'Unknown IP';
   
-  // You can still send the IP to an API or database
+  // Send the IP address to the backend API for storage
   await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/ip`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ ip: forwardedFor }),
+    body: JSON.stringify({ ip }),
   });
 
-  return forwardedFor;
+  return ip;
 }
+
 
 
 
