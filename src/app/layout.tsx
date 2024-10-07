@@ -3,7 +3,6 @@ import { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
-import { ClientLoading } from "@/context/ClientLoading";
 import Header from "@/components/Header";
 
 const geistSans = localFont({
@@ -31,14 +30,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link href="https://fonts.googleapis.com/css2?family=Tillana:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider>
-          <ClientLoading>
-            <Header />
-            {children}
-          </ClientLoading>
+          <Header />
+          {children}
         </ThemeProvider>
       </body>
     </html>

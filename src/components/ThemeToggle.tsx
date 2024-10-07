@@ -9,7 +9,7 @@ const ThemeToggle = () => {
 
   return (
     <button
-      className="py-2 px-4 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded"
+      className="py-2 px-4 text-gray-800 dark:text-white rounded"
       onClick={toggleTheme}
     >
       <FontAwesomeIcon icon={theme === 'light' ? faSun : faMoon} />

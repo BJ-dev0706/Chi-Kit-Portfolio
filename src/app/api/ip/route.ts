@@ -8,7 +8,6 @@ export async function POST(request: Request) {
 
   try {
     const { ip } = await request.json(); // Extract IP address from request body
-    console.log(ip);
 
     // Check if the IP address already exists in the database
     const existingIp = await IpAddress.findOne({ ip });

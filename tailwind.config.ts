@@ -12,6 +12,16 @@ const config: Config = {
       },
       backgroundColor: {
         'dark': '#1E1E1E'
+      },
+      fontFamily: {
+        tillana: ['"Tillana"', 'system-ui'], // Custom font family
+      },
+      fontWeight: {
+        regular: '400',
+        medium: '500',
+        semibold: '600',
+        bold: '700',
+        extrabold: '800',
       }
     },
   },
